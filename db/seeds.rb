@@ -1,3 +1,8 @@
+require 'faker'
+Company.destroy_all
+Dev.destroy_all
+Freebie.destroy_all
+
 puts "Creating companies..."
 Company.create(name: "Google", founding_year: 1998)
 Company.create(name: "Facebook", founding_year: 2004)
@@ -17,5 +22,14 @@ puts "Creating freebies..."
 # * and a freebie belongs to a company.                         *
 # ***************************************************************
 # Create freebies Here
+10.times do
+    # Get a random value between 1 and 10:
+    value = rand(1..20)
+    # Get a company instance:
+    company_id = Company.all.sample.id
+    #Get a dev instance:
+    dev_id = Dev.all.sample.id
+    Freebie.create(item_name: Faker::Tea.variety, value: value, company_id: company_id, dev_id: dev_id)
+end
 
 puts "Seeding done!"
